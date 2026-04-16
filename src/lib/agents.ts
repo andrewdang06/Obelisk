@@ -50,7 +50,7 @@ export function buildAgentsSuggestion({
   return `# AGENTS.md
 
 ## Project Purpose
-${repoName} is maintained through Codex Reliability Layer. Keep changes scoped, verified, and easy to review.
+${repoName} is maintained through Obelisk. Keep changes scoped, verified, and easy to review.
 
 ## Architecture Notes
 ${architectureSummary || "Document the core architecture before broad changes."}

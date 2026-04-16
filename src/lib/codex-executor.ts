@@ -56,7 +56,7 @@ function buildPrompt({
   } | null;
   agentsContent: string;
 }) {
-  return `You are operating inside a local repository through Codex Reliability Layer.
+  return `You are operating inside a local repository through Obelisk.
 
 TASK
 Title: ${taskTitle}

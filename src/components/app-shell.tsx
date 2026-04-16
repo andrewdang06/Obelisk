@@ -19,7 +19,7 @@ export function AppShell({ children }: { children: ReactNode }) {
           <Link href="/" className="group flex items-center gap-3">
             <span className="h-2.5 w-2.5 rounded-sm border border-signal-500/50 bg-signal-500 shadow-signal transition group-hover:scale-110" />
             <span className="text-xs font-semibold uppercase tracking-[0.24em] text-zinc-200 sm:text-sm">
-              Codex Reliability Layer
+              Obelisk
             </span>
           </Link>
           <nav className="flex items-center gap-2 overflow-x-auto">

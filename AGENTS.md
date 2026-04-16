@@ -1,7 +1,7 @@
 # AGENTS.md
 
 ## Project Purpose
-This repository implements a Codex Reliability Layer: a web app and backend orchestration system that improves Codex CLI reliability through planning, repo memory, verification, and review.
+This repository implements Obelisk: a web app and backend orchestration system that improves Codex CLI reliability through planning, repo memory, verification, and review.
 
 ## Rules
 - Always plan before coding.

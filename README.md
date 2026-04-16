@@ -1,6 +1,6 @@
-# Codex Reliability Layer
+# Obelisk
 
-Codex Reliability Layer is a local-first control panel for making Codex CLI coding work more reviewable. It records repository context, generates a plan before execution, runs Codex CLI inside the target repo, captures logs and changed files, runs verification, computes confidence, and presents the evidence in a review dashboard.
+Obelisk is a local-first control panel for making Codex CLI coding work more reviewable. It records repository context, generates a plan before execution, runs Codex CLI inside the target repo, captures logs and changed files, runs verification, computes confidence, and presents the evidence in a review dashboard.
 
 ## Features
 - Register local repositories by absolute path.
@@ -44,7 +44,7 @@ cp .env.example .env
 3. Set `DATABASE_URL` in `.env`:
 
 ```env
-DATABASE_URL="postgresql://postgres:postgres@localhost:5432/codex_reliability_layer?schema=public"
+DATABASE_URL="postgresql://postgres:postgres@localhost:5432/obelisk?schema=public"
 CODEX_CLI_COMMAND="codex"
 CODEX_CLI_ARGS="exec"
 ```

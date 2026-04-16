@@ -3,7 +3,7 @@ import { AppShell } from "@/components/app-shell";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Codex Reliability Layer",
+  title: "Obelisk",
   description:
     "A control panel for structured planning, Codex CLI execution, verification, and human review.",
 };
