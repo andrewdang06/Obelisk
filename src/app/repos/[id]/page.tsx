@@ -106,11 +106,28 @@ export default async function RepoDetailPage({
                   <p className="line-clamp-3 text-sm leading-6 text-zinc-400">
                     {task.description}
                   </p>
+                  {task.plan ? (
+                    <div className="rounded-md border border-white/10 bg-black/20 p-4">
+                      <p className="text-xs uppercase tracking-[0.2em] text-zinc-500">
+                        Plan summary
+                      </p>
+                      <p className="mt-2 text-sm leading-6 text-zinc-300">
+                        {task.plan.summary}
+                      </p>
+                      <div className="mt-3 flex flex-wrap gap-2">
+                        {asStringArray(task.plan.likelyFiles)
+                          .slice(0, 4)
+                          .map((file) => (
+                            <Badge key={file}>{file}</Badge>
+                          ))}
+                      </div>
+                    </div>
+                  ) : null}
                   <div className="flex flex-wrap items-center gap-3">
                     <RunButton taskId={task.id} disabled={!task.plan} />
                     {!task.plan ? (
                       <span className="text-xs text-amber-200">
-                        Planner milestone will generate this before execution.
+                        Generate a plan before execution.
                       </span>
                     ) : null}
                   </div>
