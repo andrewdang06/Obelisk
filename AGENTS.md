@@ -18,6 +18,27 @@ This repository implements a Codex Reliability Layer: a web app and backend orch
 4. Simple but solid UI
 5. Easy local setup
 
+## Planning Contract
+Every coding task must produce a saved plan before execution. A useful plan in this repository includes:
+- A task summary in plain language.
+- Concrete implementation steps that can be reviewed before Codex runs.
+- Likely files or directories that should change.
+- Risk notes for migrations, shared services, auth boundaries, filesystem access, child process execution, and UI state.
+- Verification commands that the system will attempt after execution.
+- Rollback notes that explain how to unwind the change if verification fails.
+
+Plans are not decorative. They are used later to evaluate adherence by comparing expected files, changed files, risky file access, and verification outcomes.
+
+## Reliability Flow
+1. Register a local repository and store its path.
+2. Load repo memory and target-repo `AGENTS.md` guidance.
+3. Save a task and generate a plan.
+4. Execute Codex CLI from inside the target repo with task, plan, memory, and guidance.
+5. Capture stdout, stderr, timestamps, exit status, changed files, and diff summary.
+6. Run verification commands when available.
+7. Compute confidence from objective evidence, not optimism.
+8. Present a review screen that makes failures and uncertainty visible.
+
 ## Completion Checklist
 For each task:
 1. Update or create a plan.
