@@ -5,6 +5,7 @@ import { asStringArray } from "@/lib/format";
 import { getGitSummary } from "@/lib/git";
 import { generatePlanForTask } from "@/lib/planner";
 import { prisma } from "@/lib/prisma";
+import { runVerificationForRun } from "@/lib/verification";
 
 const DEFAULT_CODEX_COMMAND = "codex";
 const DEFAULT_CODEX_ARGS = "exec";
@@ -234,5 +235,6 @@ export async function executeTaskWithCodex(taskId: string) {
     data: { status: succeeded ? "COMPLETED" : "FAILED" },
   });
 
-  return updatedRun;
+  const verified = await runVerificationForRun(updatedRun.id);
+  return verified.run;
 }
