@@ -3,6 +3,7 @@ import { promises as fs } from "node:fs";
 import path from "node:path";
 import type { CheckStatus } from "@prisma/client";
 import { ApiError } from "@/lib/api";
+import { computeConfidenceForRun } from "@/lib/confidence";
 import { prisma } from "@/lib/prisma";
 
 type VerificationKey = "test" | "lint" | "typecheck";
@@ -165,7 +166,7 @@ export async function runVerificationForRun(runId: string) {
   const hasFailedCheck = Object.values(statuses).includes("FAILED");
   const finalStatus = executionAlreadyFailed || hasFailedCheck ? "FAILED" : "VERIFIED";
 
-  const updatedRun = await prisma.run.update({
+  await prisma.run.update({
     where: { id: runId },
     data: { status: finalStatus },
     include: {
@@ -184,5 +185,7 @@ export async function runVerificationForRun(runId: string) {
     data: { status: finalStatus === "VERIFIED" ? "COMPLETED" : "FAILED" },
   });
 
-  return { run: updatedRun, verification };
+  const scoredRun = await computeConfidenceForRun(runId);
+
+  return { run: scoredRun, verification };
 }
