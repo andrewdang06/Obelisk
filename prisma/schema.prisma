@@ -1,0 +1,115 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum TaskStatus {
+  DRAFT
+  PLANNED
+  RUNNING
+  COMPLETED
+  FAILED
+}
+
+enum RunStatus {
+  QUEUED
+  RUNNING
+  SUCCEEDED
+  FAILED
+  VERIFYING
+  VERIFIED
+}
+
+enum CheckStatus {
+  NOT_RUN
+  PASSED
+  FAILED
+  SKIPPED
+}
+
+model Repo {
+  id          String      @id @default(cuid())
+  name        String
+  localPath   String      @unique
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+  tasks       Task[]
+  repoMemory  RepoMemory?
+
+  @@index([createdAt])
+}
+
+model Task {
+  id          String     @id @default(cuid())
+  repoId      String
+  title       String
+  description String     @db.Text
+  status      TaskStatus @default(DRAFT)
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+  repo        Repo       @relation(fields: [repoId], references: [id], onDelete: Cascade)
+  plan        Plan?
+  runs        Run[]
+
+  @@index([repoId, createdAt])
+  @@index([status])
+}
+
+model Plan {
+  id                String   @id @default(cuid())
+  taskId            String   @unique
+  summary           String   @db.Text
+  steps             Json
+  likelyFiles       Json
+  risks             Json
+  verificationSteps Json
+  rollbackNotes     String   @db.Text
+  createdAt         DateTime @default(now())
+  task              Task     @relation(fields: [taskId], references: [id], onDelete: Cascade)
+}
+
+model Run {
+  id              String              @id @default(cuid())
+  taskId          String
+  status          RunStatus           @default(QUEUED)
+  codexCommand    String              @db.Text
+  stdout          String              @default("") @db.Text
+  stderr          String              @default("") @db.Text
+  diffSummary     Json?
+  confidenceScore Int?
+  startedAt       DateTime?
+  finishedAt      DateTime?
+  task            Task                @relation(fields: [taskId], references: [id], onDelete: Cascade)
+  verification    VerificationResult?
+
+  @@index([taskId])
+  @@index([status])
+  @@index([startedAt])
+}
+
+model VerificationResult {
+  id              String      @id @default(cuid())
+  runId           String      @unique
+  testStatus      CheckStatus @default(NOT_RUN)
+  lintStatus      CheckStatus @default(NOT_RUN)
+  typecheckStatus CheckStatus @default(NOT_RUN)
+  notes           String      @default("") @db.Text
+  run             Run         @relation(fields: [runId], references: [id], onDelete: Cascade)
+}
+
+model RepoMemory {
+  id                   String   @id @default(cuid())
+  repoId               String   @unique
+  architectureSummary  String   @default("") @db.Text
+  codingConventions    String   @default("") @db.Text
+  importantModules     Json
+  riskyFiles           Json
+  failedAttempts       Json
+  successfulStrategies Json
+  updatedAt            DateTime @updatedAt
+  repo                 Repo     @relation(fields: [repoId], references: [id], onDelete: Cascade)
+}
