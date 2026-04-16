@@ -1,5 +1,5 @@
 import { created, handleRouteError } from "@/lib/api";
-import { createQueuedRun } from "@/lib/runs";
+import { executeTaskWithCodex } from "@/lib/codex-executor";
 
 export async function POST(
   _request: Request,
@@ -7,7 +7,7 @@ export async function POST(
 ) {
   try {
     const { id } = await context.params;
-    return created({ run: await createQueuedRun(id) });
+    return created({ run: await executeTaskWithCodex(id) });
   } catch (error) {
     return handleRouteError(error);
   }
