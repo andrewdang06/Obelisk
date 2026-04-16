@@ -23,7 +23,7 @@ export default async function HomePage() {
           <p className="text-xs uppercase tracking-[0.3em] text-signal-500">
             Reliability console
           </p>
-          <h1 className="mt-4 max-w-4xl text-4xl font-semibold leading-tight text-zinc-50 md:text-6xl">
+          <h1 className="mt-4 max-w-4xl text-4xl font-semibold leading-[1.03] text-zinc-50 md:text-6xl">
             Put evidence between a coding task and the merge.
           </h1>
           <p className="mt-5 max-w-2xl text-base leading-7 text-zinc-400">
@@ -41,19 +41,25 @@ export default async function HomePage() {
 
       <section className="grid gap-4 md:grid-cols-3">
         <Panel className="p-5">
-          <p className="text-sm text-zinc-500">Repositories</p>
+          <p className="text-xs uppercase tracking-[0.22em] text-zinc-500">
+            Repositories
+          </p>
           <p className="mt-3 text-4xl font-semibold text-zinc-100">
             {repos.length}
           </p>
         </Panel>
         <Panel className="p-5">
-          <p className="text-sm text-zinc-500">Tasks</p>
+          <p className="text-xs uppercase tracking-[0.22em] text-zinc-500">
+            Tasks
+          </p>
           <p className="mt-3 text-4xl font-semibold text-zinc-100">
             {taskCount}
           </p>
         </Panel>
         <Panel className="p-5">
-          <p className="text-sm text-zinc-500">Verified runs</p>
+          <p className="text-xs uppercase tracking-[0.22em] text-zinc-500">
+            Verified runs
+          </p>
           <p className="mt-3 text-4xl font-semibold text-zinc-100">
             {verifiedRuns}
           </p>

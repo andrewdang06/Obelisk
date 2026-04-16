@@ -10,7 +10,7 @@ export function Panel({
   return (
     <section
       className={clsx(
-        "rounded-lg border border-white/10 bg-white/[0.035] shadow-panel",
+        "rounded-lg border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.045),rgba(255,255,255,0.025))] shadow-panel backdrop-blur-[2px]",
         className,
       )}
     >

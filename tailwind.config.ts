@@ -46,6 +46,9 @@ const config: Config = {
         panel: "0 24px 80px rgba(0, 0, 0, 0.42)",
         signal: "0 0 36px rgba(34, 211, 238, 0.12)",
       },
+      transitionTimingFunction: {
+        precise: "cubic-bezier(0.2, 0.8, 0.2, 1)",
+      },
     },
   },
   plugins: [],
